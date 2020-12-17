@@ -151,7 +151,8 @@ class SpotifyDataFetcher(SpotifyAuthenticator):
             playlist and their respective audio features.
         """
         tracks = self.fetch_playlist_track_ids(username, playlist_name)
-        track_infos = {name: self.fetch_track_features(id) for name, id in tracks.items()}
+        track_infos = {name: self.fetch_track_features(id)
+                       for name, id in tracks.items()}
 
         tracks_dataframe = pd.DataFrame.from_dict(track_infos, orient='index')
 

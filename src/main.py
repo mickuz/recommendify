@@ -1,6 +1,7 @@
-from utils import merge_playlist_dataframes
-from data_fetcher import SpotifyDataFetcher
-from config import username, scope, redirect_uri, SPOTIPY_CLIENT_ID, SPOTIPY_CLIENT_SECRET
+from data.dataframes_merger import merge_playlist_dataframes
+from data.data_fetcher import SpotifyDataFetcher
+from configs.config import (username, scope, redirect_uri, SPOTIPY_CLIENT_ID,
+                            SPOTIPY_CLIENT_SECRET)
 
 import pandas as pd
 
@@ -17,7 +18,7 @@ def main():
                                    'Songs for Machine Learning project (good)',
                                    'Songs for Machine Learning project (bad)')
 
-    df.to_csv('./songs.csv', index=True)
+    df.to_csv('../data/raw/songs.csv', index=True)
 
 
 if __name__ == '__main__':

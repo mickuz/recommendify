@@ -1,0 +1,9 @@
+api:
+  username: 1166760903
+  scope: playlist-read-private
+  uri: http://localhost:8887/callback/
+playlists:
+  like: ML project (like)
+  dislike: ML project (dislike)
+data:
+  raw-dataset: ../../data/raw/songs.csv

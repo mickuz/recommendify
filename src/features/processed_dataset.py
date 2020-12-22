@@ -1,3 +1,5 @@
+"""This script generates processed data for model training."""
+
 import yaml
 import pandas as pd
 

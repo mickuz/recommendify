@@ -1,3 +1,5 @@
+"""This script generates raw data for further analysis and processing."""
+
 import os
 import yaml
 

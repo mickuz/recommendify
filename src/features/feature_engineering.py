@@ -1,3 +1,5 @@
+"""This module implements feature engineering techniques."""
+
 import re
 import pandas as pd
 
@@ -6,6 +8,22 @@ from sklearn.preprocessing import (StandardScaler, OneHotEncoder,
 
 
 def standardize_features(df_train, df_test, cols=[]):
+    """Scale continuous features to unit variance and zero mean.
+
+    Parameters
+    ----------
+    df_train : pandas.core.frame.DataFrame
+        A subset of data intended for training.
+    df_test : pandas.core.frame.DataFrame
+        A subset of data intended for testing.
+    cols : list of [str]
+        Names of features to transform.
+
+    Returns
+    -------
+    tuple of (pandas.core.frame.DataFrame)
+        Transformed subsets of dataset.
+    """
     df_train = df_train.copy()
     df_test = df_test.copy()
 
@@ -18,6 +36,24 @@ def standardize_features(df_train, df_test, cols=[]):
 
 
 def discretize_features(df_train, df_test, cols=[], cat_number=5):
+    """Produce categories in form of integer numbers out of continuous features.
+
+    Parameters
+    ----------
+    df_train : pandas.core.frame.DataFrame
+        A subset of data intended for training.
+    df_test : pandas.core.frame.DataFrame
+        A subset of data intended for testing.
+    cols : list of [str]
+        Names of features to transform.
+    cat_number : int
+        Number of categories to produce.
+
+    Returns
+    -------
+    tuple of (pandas.core.frame.DataFrame)
+        Transformed subsets of dataset.
+    """
     df_train = df_train.copy()
     df_test = df_test.copy()
 
@@ -32,10 +68,27 @@ def discretize_features(df_train, df_test, cols=[], cat_number=5):
 
 
 def encode_features(df_train, df_test, cols=[]):
+    """Produce one-hot numeric features out of categorical or ordinal features.
+
+    Parameters
+    ----------
+    df_train : pandas.core.frame.DataFrame
+        A subset of data intended for training.
+    df_test : pandas.core.frame.DataFrame
+        A subset of data intended for testing.
+    cols : list of [str]
+        Names of features to transform.
+
+    Returns
+    -------
+    tuple of (pandas.core.frame.DataFrame)
+        Transformed subsets of dataset.
+    """
     encoder = OneHotEncoder(handle_unknown='ignore',
                             sparse=False)
 
     def add_dummy_vars(df, encoder, transformed_features):
+        """Transform sparse matrix into data frame and drop redundant data."""
         df = df.copy()
 
         df_transformed = pd.DataFrame(transformed_features,

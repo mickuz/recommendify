@@ -7,3 +7,29 @@ playlists:
   dislike: ML project (dislike)
 data:
   raw-dataset: ../../data/raw/songs.csv
+  processed-train: ../../data/processed/songs_train.pkl
+  processed-test: ../../data/processed/songs_test.pkl
+random-seed: 11
+processing:
+  drop:
+    columns:
+      - analysis_url
+      - id
+      - track_href
+      - type
+      - uri
+  split:
+    test-size: 0.2
+  standardization:
+    columns:
+      - tempo
+      - loudness
+  discretization:
+    columns:
+      - duration_ms
+    categories: 5
+  encoding:
+    columns:
+      - duration_ms
+      - key
+      - time_signature

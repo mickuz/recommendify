@@ -5,64 +5,61 @@ from sklearn.preprocessing import (StandardScaler, OneHotEncoder,
                                    KBinsDiscretizer)
 
 
-def standardize_features(df, cols=[], if_train=True):
-    df_copy = df.copy()
+def standardize_features(df_train, df_test, cols=[]):
+    df_train = df_train.copy()
+    df_test = df_test.copy()
 
     scaler = StandardScaler()
 
-    if if_train:
-        df_copy[cols] = scaler.fit_transform(df[cols])
-    else:
-        df_copy[cols] = scaler.transform(df[cols])
+    df_train[cols] = scaler.fit_transform(df_train[cols])
+    df_test[cols] = scaler.transform(df_test[cols])
 
-    return df_copy
+    return df_train, df_test
 
 
-def discretize_features(df, cols=[], if_train=True, cat_number=5):
-    df_copy = df.copy()
+def discretize_features(df_train, df_test, cols=[], cat_number=5):
+    df_train = df_train.copy()
+    df_test = df_test.copy()
 
     discretizer = KBinsDiscretizer(strategy='uniform',
                                    n_bins=cat_number,
                                    encode='ordinal')
 
-    if if_train:
-        df_copy[cols] = discretizer.fit_transform(df[cols]).astype(int)
-    else:
-        df_copy[cols] = discretizer.transform(df[cols]).astype(int)
+    df_train[cols] = discretizer.fit_transform(df_train[cols]).astype(int)
+    df_test[cols] = discretizer.transform(df_test[cols]).astype(int)
 
-    return df_copy
+    return df_train, df_test
 
 
-def encode_features(df, cols=[], if_train=True):
+def encode_features(df_train, df_test, cols=[]):
     encoder = OneHotEncoder(handle_unknown='ignore',
                             sparse=False)
 
-    def add_dummy_vars(encoder, transformed_features):
-        df_copy = df.copy()
+    def add_dummy_vars(df, encoder, transformed_features):
+        df = df.copy()
 
         df_transformed = pd.DataFrame(transformed_features,
                                       columns=encoder.get_feature_names(cols),
-                                      index=df_copy.index)
+                                      index=df.index)
 
-        df_copy = pd.concat([df_copy, df_transformed], axis=1)
+        df = pd.concat([df, df_transformed], axis=1)
 
-        df_copy.drop(cols, axis=1, inplace=True)
+        df.drop(cols, axis=1, inplace=True)
         for col in cols:
             regex = '{}.*_\d*$'.format(col)
             pattern = re.compile(regex)
 
-            selected_cols = [col for col in list(df_copy.columns)
+            selected_cols = [col for col in list(df.columns)
                              if pattern.match(col)]
 
-            df_copy.drop(selected_cols[0], axis=1, inplace=True)
+            df.drop(selected_cols[0], axis=1, inplace=True)
 
-        return df_copy
+        return df
 
-    if if_train:
-        transformed = encoder.fit_transform(df[cols]).astype(int)
-        df = add_dummy_vars(encoder, transformed)
-    else:
-        transformed = encoder.transform(df[cols]).astype(int)
-        df = add_dummy_vars(encoder, transformed)
+    train_transformed = encoder.fit_transform(df_train[cols]).astype(int)
+    df_train = add_dummy_vars(df_train, encoder, train_transformed)
 
-    return df
+    test_transformed = encoder.transform(df_test[cols]).astype(int)
+    df_test = add_dummy_vars(df_test, encoder, test_transformed)
+
+    return df_train, df_test

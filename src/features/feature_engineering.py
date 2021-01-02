@@ -84,6 +84,9 @@ def encode_features(df_train, df_test, cols=[]):
     tuple of (pandas.core.frame.DataFrame)
         Transformed subsets of dataset.
     """
+    if not cols:
+        raise ValueError('No features to transform.')
+
     encoder = OneHotEncoder(handle_unknown='ignore',
                             sparse=False)
 
@@ -99,7 +102,7 @@ def encode_features(df_train, df_test, cols=[]):
 
         df.drop(cols, axis=1, inplace=True)
         for col in cols:
-            regex = '{}.*_\d*$'.format(col)
+            regex = '{}.*_\w*$'.format(col)
             pattern = re.compile(regex)
 
             selected_cols = [col for col in list(df.columns)

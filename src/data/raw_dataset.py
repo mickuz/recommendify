@@ -4,11 +4,11 @@ import os
 import yaml
 
 from data_fetcher import SpotifyDataFetcher
-from dataframes_merger import merge_playlist_dataframes
+from data_preparator import merge_playlist_dataframes
 
 
 def main():
-    with open('../configs/config.yaml', mode='r') as config_file:
+    with open('src/configs/config.yaml', mode='r') as config_file:
         conf = yaml.load(config_file, Loader=yaml.FullLoader)
 
     id = os.environ['CLIENT_ID']

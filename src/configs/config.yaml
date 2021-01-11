@@ -5,10 +5,13 @@ api:
 playlists:
   like: ML project (like)
   dislike: ML project (dislike)
+  predictions: ML project (predictions)
 data:
-  raw-dataset: ../../data/raw/songs.csv
-  processed-train: ../../data/processed/songs_train.pkl
-  processed-test: ../../data/processed/songs_test.pkl
+  raw-dataset: data/raw/songs.csv
+  processed-train: data/processed/songs_train.pkl
+  processed-test: data/processed/songs_test.pkl
+  interim-train: data/interim/songs_train_interim.csv
+  interim-test: data/interim/songs_test_interim.csv
 random-seed: 11
 processing:
   drop:

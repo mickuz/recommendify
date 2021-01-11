@@ -36,3 +36,5 @@ processing:
       - duration_ms
       - key
       - time_signature
+model:
+  path: models/base_model.pkl

@@ -1,7 +1,5 @@
 language: python
 python:
-  - "3.5"
-  - "3.6"
   - "3.7"
   - "3.8"
 install:
@@ -10,6 +8,5 @@ install:
   - pip install pytest-cov
 script:
   - pytest --cov-report=xml --cov=deeptabular tests/
-
 after_success:
   - codecov

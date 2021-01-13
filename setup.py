@@ -1,9 +1,9 @@
-from distutils.core import setup
+from setuptools import setup
 
 setup(name='Recommendify',
       version='0.1',
       description='Spotify Recommender System',
-      author='Michał Kuźniewicz',
+      author='Michal Kuzniewicz',
       author_email='michal.kuzniewicz@tuta.io',
       url='https://github.com/mickuz/recommendify',
       packages=['src'],

@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 setup(name='Recommendify',
       version='0.1',
@@ -6,7 +6,7 @@ setup(name='Recommendify',
       author='Michal Kuzniewicz',
       author_email='michal.kuzniewicz@tuta.io',
       url='https://github.com/mickuz/recommendify',
-      packages=['src'],
+      packages=find_packages(include=['src', 'src.*']),
       install_requires=[
             'spotipy',
             'PyYAML',

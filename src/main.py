@@ -6,9 +6,9 @@ import pickle
 
 import pandas as pd
 
-from data.data_fetcher import SpotifyDataFetcher
-from features.feature_engineering import (standardize_features,
-                                          discretize_features, encode_features)
+from .data.data_fetcher import SpotifyDataFetcher
+from .features.feature_engineering import (standardize_features,
+                                           discretize_features, encode_features)
 
 
 def main():

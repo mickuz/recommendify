@@ -3,8 +3,8 @@
 import yaml
 import pandas as pd
 
-from feature_engineering import (standardize_features, discretize_features,
-                                 encode_features)
+from .feature_engineering import (standardize_features, discretize_features,
+                                  encode_features)
 
 from sklearn.model_selection import train_test_split
 

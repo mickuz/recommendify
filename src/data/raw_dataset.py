@@ -3,8 +3,8 @@
 import os
 import yaml
 
-from data_fetcher import SpotifyDataFetcher
-from data_preparator import merge_playlist_dataframes
+from .data_fetcher import SpotifyDataFetcher
+from .data_preparator import merge_playlist_dataframes
 
 
 def main():
